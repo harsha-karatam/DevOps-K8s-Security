@@ -11,8 +11,7 @@ pipeline {
         stage ('SonarQube Analysis') {
             steps {
                     withSonarQubeEnv('sonar6') {
-                        sh 'mvn sonar:sonar -Dsonar.host.url=http://10.0.1.74:9000 -Dsonar.token=sqb_26ec25a827aeeda9c4b64f8e834fec63de636fa5'
-
+                        sh 'mvn sonar:sonar -Dsonar.host.url=http://10.0.1.74:9000 -Dsonar.token=sqp_cbc0770b7f57af73f65c4d168de370e562108017'
                     }
                     
                 }
