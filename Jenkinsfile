@@ -1,24 +1,28 @@
 pipeline {
     agent any
-   stages {
-        stage('Build') {
+    
+    stages {
+        stage ('Build') {
             steps {
                 sh 'mvn clean package'
             }
         }
-       stage ('SonarQube Analyses') {
-        steps {
-            withSonarQubeEnv('sonar6') {
-              sh 'mvn sonar:sonar -Dsonar.host.url=http://10.0.1.74:9000 -Dsonar.login=admin -Dsonar.password=Harsha11@123'
-            }
-            timeout(time: 2, unit: 'MINUTES') {    
-                script {
-                  waitForQualityGate abortPipeline: true
+        
+        stage ('SonarQube Analysis') {
+            steps {
+                    withSonarQubeEnv('sonar6') {
+                        sh 'mvn sonar:sonar -Dsonar.host.url=http://10.0.1.74:9000 -Dsonar.token=sqp_cbc0770b7f57af73f65c4d168de370e562108017'
+                    }
+                    timeout(time: 2, unit: 'MINUTES') {
+                        script {
+                            waitForQualityGate abortPipeline: true
+                        }
+                    }
                 }
-          }
+            }
         }
-       }
     }
 }
+
 
 
