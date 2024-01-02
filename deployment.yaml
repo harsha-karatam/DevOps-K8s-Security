@@ -17,7 +17,7 @@ spec:
         - name: Test
           image: my-nginx-7fbf685c4d-9rnmg:harsha
           ports:
-            - containerPort: 8060 # Change this to your app's port
+            - containerPort: 8070
 
 ---
 apiVersion: v1
@@ -30,5 +30,5 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 8060 # Change this to match your app's port
+      targetPort: 8070
   type: NodePort
