@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: Test
-          image: adoptopenjdk/openjdk8:alpine-slim
+          image: my-nginx-7fbf685c4d-9rnmg:harsha
           ports:
             - containerPort: 8060 # Change this to your app's port
 
