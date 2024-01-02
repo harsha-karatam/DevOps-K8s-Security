@@ -5,7 +5,7 @@ pipeline {
     stage('Build Docker Image') {
       steps {
         script {
-          docker.build('your-docker-image:tag') // Replace with your image and tag
+          docker.build('adoptopenjdk/openjdk8:alpine-slim') // Replace with your image and tag
         }
       }
     }
