@@ -2,20 +2,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: your-app-name
+  name: TestApp
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: your-app-name
+      app: TestApp
   template:
     metadata:
       labels:
-        app: your-app-name
+        app: TestApp
     spec:
       containers:
-        - name: your-app-container
-          image: your-docker-image:tag
+        - name: Test
+          image: adoptopenjdk/openjdk8:alpine-slim
           ports:
             - containerPort: 8060 # Change this to your app's port
 
@@ -23,10 +23,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: your-app-service
+  name: TestApp
 spec:
   selector:
-    app: your-app-name
+    app: Testapp1
   ports:
     - protocol: TCP
       port: 80
