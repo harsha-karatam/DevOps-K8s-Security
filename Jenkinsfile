@@ -1,22 +1,25 @@
 pipeline {
-  agent any
-
-  stages {
-    stage('Build Docker Image') {
-      steps {
-        script {
-          docker.build('my-nginx-7fbf685c4d-9rnmg') // Replace with your image and tag
+    agent any
+   stages {
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
         }
-      }
-    }
-
-    stage('Deploy to Minikube') {
-      steps {
-        script {
-          sh 'minikube docker-env' // Set Docker environment for Minikube
-          sh 'kubectl apply -f deployment.yaml' // Apply Kubernetes manifests
+       stage ('SonarQube Analyses') {
+        steps {
+            withSonarQubeEnv('sonar6') {
+              sh 'mvn sonar:sonar -Dsonar.host.url=http://10.0.1.74:9000 -Dsonar.login=admin -Dsonar.password=Harsha11@123'
+            }
+            timeout(time: 2, unit: 'MINUTES') {    
+                script {
+                  waitForQualityGate abortPipeline: true
+                }
+          }
         }
-      }
+       }
     }
-  }
 }
+
+
+
